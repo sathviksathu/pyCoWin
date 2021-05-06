@@ -20,6 +20,7 @@ from aws_ses_client import aws_ses_client_send_mail
 STATUS_OK = 200
 STATUS_NO = 400
 MAIN_URL = "http://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?"
+headers_dict = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"}
 
 
 ## setting logging level
@@ -118,7 +119,7 @@ def run_cowin():
         district_info = SEARCH_DICT[district]
         url = construct_url(district_info['district'], date)
         logging.debug("Hitting URL: "+url)
-        res = requests.get(url)
+        res = requests.get(url, headers=headers_dict)
         logging.info("Response received with status: {res.status_code}")
         if res.status_code == 200:
             logging.info("Processing the response further..")
